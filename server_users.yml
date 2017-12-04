@@ -1,0 +1,9 @@
+---
+
+- hosts: web
+  become: true
+  become_user: root
+  become_method: sudo
+
+  roles:
+    - server_users

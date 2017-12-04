@@ -1,0 +1,25 @@
+---
+# tasks file for squid
+
+- name: Installing squid
+  apt:
+    name: squid
+    update_cache: yes
+  notify:
+    - restart squid
+
+- name: stat squid.conf
+  stat: path=/etc/squid/squid.conf
+  register: squid.conf_stat
+
+- name: Move squid.conf to squid.conf.old
+  command: mv /etc/squid/squid.conf /etc/squid/squid.conf.old
+  when: squid.conf_stat.exists
+
+- name: Copying template with new squid configuration ---> /etc/squid/squid.conf
+  template:
+    src: /templates/squid.conf.j2
+    dest: /etc/squid/squid.conf
+    group: root
+    mode: "u=rw,g=r,o=r"
+

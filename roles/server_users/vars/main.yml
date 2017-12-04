@@ -1,0 +1,29 @@
+---
+# vars file for server_users
+#
+
+users:
+  user1:
+    name: Name and Surname of User1
+    username: user1
+    public_keys: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCs0yQ3foxsbuZfdg5b2hAMBS1TDYjW3ZZcHHvgcU9/J1fQ4Hsje3chrnt5ZCAqGicef4pDDXpNf8Dg1j1vtEytgFce5O2L+RqQyYTm5fdgtPj1qUJAVaXlJGInt6eEjhd558SyXpUrQqCjri8sZ0JkJTjzLiPo2aV/+hEZEbvTn/DpI5EeO4fVnQj9ksSq25WWmdEn6Y8CRMiQLNE/jitgxc/iwGWMhDh/rt+lGltl+DfhEIRmEnFwzw7eGTnPTObelEOoOK71ZEUeE/EVT/teO41qDnux0ZHgOrm2NzZcLqRLgPsGzEg/dcEiEaoRdhJlFxeFqvZh/WhZLf0Vai/X user1@sysadmin-ThinkPad-E570"
+    shell: "/bin/bash"
+    state: present
+    groups: ['sudo', 'svngroup']
+    home: yes
+  user2:
+    name: Name and surname of User2
+    username: user2
+    public_keys: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC9+mt6LqmFriupb2IyvF5aIo3+Zb4CD+Nj1OMQ5HclNMlPHbgaeoxkBC0QOIIWsWha2OBlMiqb7j6Cyp4/8hGCvf67xFTrKCaLOTt9nnv5Rj9sgNRM2YL1tLUWga0gXQaOeYOtMvRuynOY8jI2Jd7rhcqHDHcuFwyFFYnZXN993QyJbcYpOPk4/uWs5SVh53uxNu8E/LgT7703w1/WA+FV9tKvKvTuhRcwvkXIByOdsuTx8c8lz+FOAeMEKmaofm6tGSCZk1UOwuKqb7J7gYALSuTyRZG7QnFuGzpk6eCQAwDrkaqppzUBm9MB/DM56ThLUz00bRrDlpqBM9ixvGQz user2@sysadmin-ThinkPad-E570"
+    shell: "/bin/bash"
+    state: absent
+    groups: ['svngroup']
+    home: yes
+  user3:
+    name: Name and surname of User2
+    username: user3
+    public_keys: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2H7lBDYL21Gu+XqheLRLaztY3408XA6B4j1zhhPuupd0xB1TnydToWtVqSPfy1GZGpMa4HIGg9Cr92+DqdqyPDiR8pHgKHf1NMlH7UZRtD9SxrcI3bBxnJbTjJU045mJSX+nGUP1wdR+SEMAlYGwLMO4N9wnGejU1UhLraU/94EnhLTAsX470DDdO8ot9/+VPeF1/iaYrSM+YF5enrJkew8iNDvgmmG8ARfMctfJOU/3mkQlx5HrpgXHrVlUnGPFLePlM6JFlbBeNh2Uz/94jRbJBYAZLZiaohmXGuWO6TE2gt4aVQy102Rl1VtnZdTKkage1o/yWrP1dXfLGzXGD user3@sysadmin-ThinkPad-E570"
+    shell: "/bin/bash"
+    state: present
+    groups: ['svngroup']
+    home: yes

@@ -1,0 +1,64 @@
+# Auth type and password file
+auth_param basic program /usr/lib/squid/basic_ncsa_auth /etc/squid/passwd
+auth_param basic realm proxy
+
+# access rules for ports
+acl Safe_ports port 82          # haproxy
+acl Safe_ports port 80          # http
+acl Safe_ports port 443         # https
+acl Safe_ports port 8080        # grafana
+acl Safe_ports port 8091        # couchbase
+acl Safe_ports port 8084        # proxy
+acl Safe_ports port 8500        # consul test
+acl Safe_ports port 5500        # netacuity
+acl Safe_ports port 15672        # rabbitmq
+acl CONNECT method CONNECT
+
+# access rules for servers
+acl basebone dstdomain .basebone.com
+http_access allow basebone
+
+# Deny requests to certain unsafe ports
+http_access deny !Safe_ports
+
+# Only allow cachemgr access from localhost
+http_access allow localhost manager
+http_access deny manager
+
+# Deny CONNECT to other than secure SSL ports
+http_access deny CONNECT !SSL_ports
+
+# Example rule allowing access from your local networks.
+# Adapt localnet in the ACL section to list your (internal) IP networks
+# from where browsing should be allowed
+#http_access allow localnet
+#http_access allow localhost
+
+# Require the authenticated user
+acl authenticated proxy_auth REQUIRED
+# Access to only authenticated user
+http_access allow authenticated
+
+# And finally deny all other access to this proxy
+http_access deny all
+
+# Squid normally listens to port 3128
+http_port 8084
+
+#Default:
+# access_log daemon:/var/log/squid/access.log squid
+
+# Leave coredumps in the first cache dir
+coredump_dir /var/spool/squid
+
+#
+# Add any of your own refresh_pattern entries above these.
+#
+refresh_pattern ^ftp:           1440    20%     10080
+refresh_pattern ^gopher:        1440    0%      1440
+refresh_pattern -i (/cgi-bin/|\?) 0     0%      0
+refresh_pattern (Release|Packages(.gz)*)$      0       20%     2880
+
+# example lin deb packages
+#refresh_pattern (\.deb|\.udeb)$   129600 100% 129600
+refresh_pattern .               0       20%     4320
