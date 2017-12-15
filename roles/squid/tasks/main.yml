@@ -10,7 +10,7 @@
 
 - name: stat squid.conf
   stat: path=/etc/squid/squid.conf
-  register: squid-conf_stat
+  register: squid_conf_stat
 
 - name: Move squid.conf to squid.conf.old
   command: mv /etc/squid/squid.conf /etc/squid/squid.conf.old
