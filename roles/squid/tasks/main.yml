@@ -14,7 +14,7 @@
 
 - name: Move squid.conf to squid.conf.old
   command: mv /etc/squid/squid.conf /etc/squid/squid.conf.old
-  when: squid-conf_stat.exists
+  when: squid-conf_stat.stat.exists == True
 
 - name: Copying template with new squid configuration ---> /etc/squid/squid.conf
   template:
