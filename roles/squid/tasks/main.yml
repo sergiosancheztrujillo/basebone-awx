@@ -18,7 +18,7 @@
 
 - name: Copying template with new squid configuration ---> /etc/squid/squid.conf
   template:
-    src: /templates/squid.conf.j2
+    src: templates/squid.conf.j2
     dest: /etc/squid/squid.conf
     group: root
     mode: "u=rw,g=r,o=r"
